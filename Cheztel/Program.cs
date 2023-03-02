@@ -1,7 +1,11 @@
+using Cheztel.Servicios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IAutenticarUsuarios, AutenticarUsuarios>(); 
+builder.Services.AddTransient<IRepositorioHoteles, RepositorioHoteles>();
 
 var app = builder.Build();
 
@@ -22,6 +26,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Usuario}/{action=Index}/{id?}");
 
 app.Run();

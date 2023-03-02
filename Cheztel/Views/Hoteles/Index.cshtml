@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Hotel>
+
+@{
+
+    ViewData["Title"] = "Hotes disponibles";
+}
+
+
+
+<h1>Listado de Hoteles</h1>
+<h5>Seleccione el hotel</h5>
+
+
+
+<table class="table">
+    <a asp-action="Crear" asp-controller="Hoteles" class="btn btn-primary">Crear</a>
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Responsable</th>
+            <th scope="col">Calificacion</th>
+            <th scope="col">Servicio</th>
+            <th scope="col">Accion</th>           
+        </tr>
+    </thead>
+    <tbody id="reordenable">
+
+        @foreach (var hotel in Model)
+        {
+
+
+            <tr>
+                <td>
+                    <p>@hotel.Nombre</p>
+                </td>
+                <td>
+                    <p>@hotel.Direccion</p>
+                </td>
+                <td>
+                    <p>@hotel.Telefono</p>
+                </td>
+                <td>
+                    <p>@hotel.Responsable</p>
+                </td>
+                <td>
+                    <p>@hotel.Calificacion</p>
+                </td>
+                <td>
+                    <p>@hotel.IdServicio</p>
+                </td>
+                <td>
+                    <input type="hidden" value="@hotel.Id" class="ids"/>
+                    <a class="btn btn-primary" asp-action="Habitaciones">Habitaciones</a>
+                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@hotel.Id">Editar</a>
+                    <a class="btn btn-danger" asp-action="Borrar" asp-route-id="@hotel.Id">Borrar</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
