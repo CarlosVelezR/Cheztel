@@ -29,5 +29,28 @@ namespace Cheztel.Controllers
             
         }
 
-    }
+
+        public IActionResult Crear()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Crear(Hotel hotel)
+        {
+
+
+            if (!ModelState.IsValid)
+            {
+                return View(hotel);
+            }
+
+            await repositorioHoteles.CrearHotel(hotel);
+
+            return RedirectToAction("Index");
+
+        }
+
+    }  
 }

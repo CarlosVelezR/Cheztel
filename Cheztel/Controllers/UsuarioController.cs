@@ -24,7 +24,7 @@ namespace Cheztel.Controllers
         {
 
             var existeUsuario = await servicioAutenticar.Existe(usuario.Nombre, usuario.Password);
-            var existeUsername = await servicioAutenticar.ExisteUsuario(usuario.Nombre);
+            
 
     
             if (existeUsuario)
