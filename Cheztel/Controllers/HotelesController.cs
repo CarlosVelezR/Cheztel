@@ -2,6 +2,7 @@
 using Cheztel.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
+using System.Diagnostics.Contracts;
 
 namespace Cheztel.Controllers
 {
@@ -50,6 +51,16 @@ namespace Cheztel.Controllers
 
             return RedirectToAction("Index");
 
+        }
+
+
+
+        public async Task<IActionResult> Eliminar(int Id)
+        {
+
+            await repositorioHoteles.Eliminar(Id);
+
+            return RedirectToAction("Index");
         }
 
     }  

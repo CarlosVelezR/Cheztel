@@ -8,6 +8,7 @@ namespace Cheztel.Servicios
     {
 
         Task CrearHotel(Hotel hotel);
+        Task<IEnumerable<Hotel>> Eliminar(int id);
         Task<IEnumerable<Hotel>> Listar();
     }
 
@@ -55,6 +56,15 @@ namespace Cheztel.Servicios
                 }, commandType: System.Data.CommandType.StoredProcedure);
 
             hotel.Id = crearHotel;
+        }
+
+
+        public async Task <IEnumerable<Hotel>> Eliminar (int id)
+        {
+
+            var conn = new SqlConnection(connectionString);
+
+            return await conn.QueryAsync<Hotel>(@"DELETE Hoteles WHERE ID = @id ", new {id} );
         }
 
         
