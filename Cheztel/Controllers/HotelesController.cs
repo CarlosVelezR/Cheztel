@@ -55,6 +55,26 @@ namespace Cheztel.Controllers
 
 
 
+        public async Task<IActionResult> Editar(int id)
+        {
+
+            var hotel = await repositorioHoteles.ObtenerHotelId(id);
+                            
+
+            return View(hotel);
+        }
+
+        [HttpPost]
+        public async Task <IActionResult> Editar(Hotel hotel)
+        {
+
+            await repositorioHoteles.EditarHodel(hotel);
+
+            return RedirectToAction("Index");
+        }
+
+
+
         public async Task<IActionResult> Eliminar(int Id)
         {
 

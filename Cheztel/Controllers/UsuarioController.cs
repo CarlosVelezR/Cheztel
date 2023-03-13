@@ -30,6 +30,7 @@ namespace Cheztel.Controllers
             if (existeUsuario)
             {
 
+                
 
                 return RedirectToAction("Index", "Hoteles");
             }
@@ -38,7 +39,7 @@ namespace Cheztel.Controllers
             {
 
                 ModelState.AddModelError(nameof(usuario.Password), 
-                    $"El password {usuario.Password} es incorrecto existe");
+                    $"El usuario o contraseña es incorrecta.");
 
                 return View("Index", usuario);
             }

@@ -1,15 +1,18 @@
 ﻿@model Usuario
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Iniciar Sesion"] = "Iniciar Sesion";
 }
 
-
-
-
-
 <section class="form-group">
+    
+
+    <div>
+        <img src="~/img/cheztelogo.png" alt="Logo"  width="200px" class="mb3-3"/>
+    </div>
+
+
     <div class="col-md-8 col-lg-5">
-    <h2 class="mb-3">Iniciar Sesion</h2>
+ 
     <form asp-action="Iniciar">
 
     <div class="from-outline mb-4">
@@ -27,7 +30,9 @@
         <span asp-validation-for="Password" class="text-bg-danger"></span>
     </div>
 
-    <button class="btn btn-primary" asp-action="Iniciar">Iniciar Sesion</button>
+
+
+    <button class="btn btn-danger" asp-action="Iniciar">Iniciar Sesion</button>
 
 </form>
 

@@ -8,8 +8,10 @@ namespace Cheztel.Servicios
     {
 
         Task CrearHotel(Hotel hotel);
+        Task EditarHodel(Hotel hotel);
         Task<IEnumerable<Hotel>> Eliminar(int id);
         Task<IEnumerable<Hotel>> Listar();
+        Task<Hotel> ObtenerHotelId(int id);
     }
 
     public class RepositorioHoteles : IRepositorioHoteles 
@@ -33,6 +35,39 @@ namespace Cheztel.Servicios
 
             return await connection.QueryAsync<Hotel>(@"SELECT Id,Nombre ,Direccion,Telefono,Responsable,Calificacion,IdServicio 
                                                        FROM Cheztel.dbo.Hoteles");
+        }
+
+        public async Task <Hotel> ObtenerHotelId(int id)
+        {
+
+            using var conn = new SqlConnection(connectionString);
+
+
+            return await conn.QueryFirstOrDefaultAsync<Hotel>(@"SELECT Id,Nombre ,Direccion,Telefono,Responsable,Calificacion 
+                                                       FROM Cheztel.dbo.Hoteles WHERE Id = @id", new { id });
+
+        }
+
+        public async Task EditarHodel(Hotel hotel)
+        {
+
+            using var conn = new SqlConnection(connectionString);
+
+            var ActualizarHotel = await conn.QuerySingleOrDefaultAsync<int>("SP_EDITAR_HOTEL",
+
+            new
+
+            {
+                hotel.Id,
+                hotel.Nombre,
+                hotel.Direccion,
+                hotel.Telefono,
+                hotel.Responsable,
+                hotel.Calificacion
+
+            }, commandType: System.Data.CommandType.StoredProcedure);                
+                
+               
         }
 
 

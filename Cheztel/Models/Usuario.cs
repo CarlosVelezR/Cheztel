@@ -9,7 +9,7 @@ namespace Cheztel.Models
         [Required(ErrorMessage = "El nombre de usuario es requerido.")]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "La contraseana de usuario es requerida.")]
+        [Required(ErrorMessage = "La contraseña de usuario es requerida.")]
         public string Password { get; set; }
         public int TipoRol { get; set; }
     }

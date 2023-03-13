@@ -1,20 +1,39 @@
 ﻿@model Usuario
 @{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/Cheztel.styles.css" asp-append-version="true" />
+<link href="~/css/bootstrapaddition.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
 
-<section class="form-group">
-    <div class="col-md-8 col-lg-5">
-        <h2 class="mb-3">Iniciar Sesion</h2>
+<div class="row">
+    <div class="fondo-city-log">
+        <img src="~/img/1146008.jpg" width="1280px" height="360px"/>
+    </div>
+
+    <section class="shadow form-group col-md-5 Contenedor-Caja-login">
+
+   <div class="text-center">
+   <img src="~/img/cheztelogo.png" alt="Logo" width="200px" class="mb-1 mt-3 text-center"/>
+   <h2 class="mb-3">Iniciar Sesion</h2>
+   </div>
+
+    <div>
+
         <form asp-action="Iniciar">
 
             <div class="from-outline mb-4">
 
                 <label asp-for="Nombre" class="form-label"></label>
                 <input type="text" asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-bg-danger"></span>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
 
             </div>
 
@@ -22,13 +41,17 @@
 
                 <label asp-for="Password" class="form-label"></label>
                 <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-bg-danger"></span>
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <button class="btn btn-primary" asp-action="Iniciar">Iniciar Sesion</button>
+            <div class="text-">
 
+            <button class="btn btn-danger mb-5" asp-action="Iniciar">Iniciar Sesion</button>
+                </div>
         </form>
 
     </div>
+
 </section>
 
+</div>
