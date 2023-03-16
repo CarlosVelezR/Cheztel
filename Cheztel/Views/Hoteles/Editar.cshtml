@@ -4,8 +4,8 @@
 
     ViewData["Hoteles"] = "Editar Hotel";
 }
-<div class="col-md-8 col-lg-5">
-    <h2 class="mb-3">Editar Hotel: @Model.Nombre </h2>
+<div class="col-md-8 col-lg-5 container">
+    <h3 class="mb-3">Editar Hotel: @Model.Nombre </h3>
 
 <form asp-action="Editar">
     <input type="hidden" asp-for="Id" />

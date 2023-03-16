@@ -47,6 +47,7 @@ namespace Cheztel.Servicios
                                                        FROM Cheztel.dbo.Hoteles WHERE Id = @id", new { id });
 
         }
+      
 
         public async Task EditarHodel(Hotel hotel)
         {
@@ -69,7 +70,6 @@ namespace Cheztel.Servicios
                 
                
         }
-
 
 
         public async Task CrearHotel (Hotel hotel)

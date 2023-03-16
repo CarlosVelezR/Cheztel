@@ -6,15 +6,15 @@
 }
 
 
+<section class="container">
 
-<h1>Listado de Hoteles</h1>
-<h5>Seleccione el hotel</h5>
+    <h5 class="mb-3">Listado de Hoteles</h5>
 
+    <table class="table table-sm">
 
+            <a asp-action="Crear" asp-controller="Hoteles" class="btn bi bi-file-plus btn-danger col-md-2 col-xs-6">Adicionar</a>            
 
-<table class="table">
-    <a asp-action="Crear" asp-controller="Hoteles" class="btn btn-primary">Crear</a>
-    <thead>
+        <thead class="thead-dark">
         <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Direccion</th>
@@ -22,7 +22,7 @@
             <th scope="col">Responsable</th>
             <th scope="col">Calificacion</th>
             <th scope="col">Servicio</th>
-            <th scope="col">Accion</th>           
+            <th scope="col">Accion</th>        
         </tr>
     </thead>
     <tbody id="reordenable">
@@ -32,33 +32,22 @@
 
 
             <tr>
-                <td>
-                    <p>@hotel.Nombre</p>
-                </td>
-                <td>
-                    <p>@hotel.Direccion</p>
-                </td>
-                <td>
-                    <p>@hotel.Telefono</p>
-                </td>
-                <td>
-                    <p>@hotel.Responsable</p>
-                </td>
-                <td>
-                    <p>@hotel.Calificacion</p>
-                </td>
-                <td>
-                    <p>@hotel.IdServicio</p>
-                </td>
+                <td>@hotel.Nombre</td>
+                <td>@hotel.Direccion</td>
+                <td>@hotel.Telefono</td>
+                <td>@hotel.Responsable</td>
+                <td>@hotel.Calificacion</td>
+                <td>@hotel.IdServicio</td>
                 <td>
                     <input type="hidden" value="@hotel.Id" class="ids"/>
-                    <a class="btn btn-primary" asp-action="Habitaciones">Habitaciones</a>
-                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@hotel.Id">Editar</a>
-                    <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@hotel.Id">Borrar</a>
+                        <a class="btn bi bi-folder2-open" asp-controller="Habitacion" asp-action="Index" asp-route-idHotel="@hotel.Id"></a>
+                        <a class="btn bi bi-pencil-square" asp-action="Editar" asp-route-id="@hotel.Id"></a>
+                    <a class="btn bi bi-trash3-fill" asp-action="Eliminar" asp-route-id="@hotel.Id"></a>
                 </td>
             </tr>
         }
 
     </tbody>
 
-</table>
+    </table>
+</section>

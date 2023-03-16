@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IAutenticarUsuarios, AutenticarUsuarios>(); 
 builder.Services.AddTransient<IRepositorioHoteles, RepositorioHoteles>();
+builder.Services.AddTransient<IRepositorioHabitaciones, RepositorioHabitaciones>();
 
 var app = builder.Build();
 

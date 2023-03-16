@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Habitacion>
+
+@{
+
+}
+
+<div class="container">
+    <h3>Habitaciones</h3>
+    <section>
+
+        <a asp-action="Crear" asp-controller="Habitacion" class="btn bi bi-file-plus btn-danger col-md-2 col-xs-6">Adicionar</a>
+
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acomodacion</th>
+                    <th>Disponibilidad</th>
+                    <th>Fecha Creacion</th>
+                    <th>Hotel</th>
+                    <th>Accion</th>
+
+                </tr>
+            </thead>
+<tbody>
+
+    @foreach (var habitacion in Model)
+                {
+                    
+                    <tr>
+                        <td>@habitacion.Nombre</td>
+                        <td>@habitacion.Acomodacion</td>
+
+                        @if (habitacion.Disponibilidad == true)
+                        {
+                            <td><a class="btn bi bi-check-circle-fill text-success"></a></td>
+                        }
+
+                        else
+                        {
+                            <td><a class="btn bi bi-x-circle-fill icon-red text-danger"></a></td>
+                        }
+
+                                               
+                        <td>@habitacion.FechaCreacion</td>
+                        <td>@habitacion.Hotel</td>
+                        <td><a class="btn bi bi-folder2-open" asp-controller="Habitacion" asp-action="Detalle" asp-route-idHotel="@habitacion.Id"> Reserva</a></td>
+                                                
+                    </tr>
+
+                }
+
+</tbody>
+
+        </table>
+
+    </section>
+
+</div>

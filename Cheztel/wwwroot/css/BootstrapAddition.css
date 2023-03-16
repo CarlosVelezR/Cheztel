@@ -22,3 +22,17 @@
     width: 100%;
     height: 15%;
 }
+
+.table-results{
+    
+
+}
+
+.icon-color-no-available{
+
+    color:red
+}
+
+.icon-color-available {
+    color: green
+}

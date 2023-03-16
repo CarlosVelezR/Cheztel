@@ -1,0 +1,51 @@
+﻿@model CrearHabitacionViewModel
+
+@{
+
+    ViewData["Hoteles"] = "Crear - Hotel";
+}
+<div class="col-md-8 col-lg-5 container">
+    <h2 class="mb-3">Registrar Habitacion</h2>
+
+
+    <form asp-action="Crear">
+
+        <div class="form-group">
+
+            <div class="form-group">
+                <label asp-for="FechaCreacion">Fecha Creacion</label>
+                <input type="text" class="form-control mb-3" asp-for="FechaCreacion" disabled="disabled" value="@DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss")"
+                placeholder="@DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss")" />
+            </div>
+
+            <label asp-for="Nombre">Nombre</label>
+            <input type="text" class="form-control mb-3" asp-for="Nombre" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+
+            <label asp-for="Acomodacion" class="form-label">Acomodacion</label>
+            <select asp-for="Acomodacion" asp-items="Model.Acomodaciones" class="form-select mb-3"></select>
+            
+            
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Hotel" class="form-label"></label>
+            <select asp-for="Hotel" asp-items="Model.Hoteles" class="form-select mb-3"></select>
+        </div>
+
+
+        <div class="form-check form-switch">
+            <input asp-for="Disponibilidad" class="form-check-input" type="checkbox">
+            <label asp-for="Disponibilidad" class="form-check-label mb-3">Disponible</label>
+        </div>
+
+         
+   
+        <button class="btn btn-danger" asp-action="Crear">Registrar</button>
+    </form>
+
+</div>
