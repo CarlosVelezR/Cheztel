@@ -24,42 +24,43 @@ namespace Cheztel.Controllers
         {
 
             var obtenerHab = await repositorioHabitaciones.ListarHabPorUsuario(idHotel);
-          
-
+         
             return View(obtenerHab);
         }
 
 
         public async Task<IActionResult> Crear()
         {
-
             
             var modelo = new CrearHabitacionViewModel();
             modelo.Hoteles = await ObtenerHotelesId();
             modelo.Acomodaciones = await ObtenerAcomodacionesId();
-
-
 
             return View(modelo);
 
         }
 
 
+        public async Task<IActionResult> ActualizarConsulta(int idHabitacion, int idHotel)
+        {
+
+            var actualizarReserva = await repositorioHabitaciones.ActualizarHabitacion(idHotel, idHabitacion);
+
+            return RedirectToAction("Index","Habitacion", new { idHotel = idHotel});
+        }
+
+
         private async Task<IEnumerable<SelectListItem>> ObtenerHotelesId()
         {
             
-
             var tipoHoteles = await repositorioHoteles.Listar();
-
             
-
             return tipoHoteles.Select(x => new SelectListItem(x.Nombre, x.Id.ToString())); 
 
         }
 
         private async Task<IEnumerable<SelectListItem>> ObtenerAcomodacionesId()
         {
-
 
             var tipoAcomodacion = await repositorioHabitaciones.ListarAcomodaciones();
 
@@ -71,7 +72,6 @@ namespace Cheztel.Controllers
         public async Task<IActionResult> Crear(Habitacion habitacion)
 
         {
-
 
             if (!ModelState.IsValid)
             {

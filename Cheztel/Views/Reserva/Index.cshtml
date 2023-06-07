@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Reserva>
+@{
+}
+
+
+
+
+<h1>Listado de reservas</h1>
+
+<div class="container">
+
+    <table class="table-bordered">
+
+        <thead>
+            <tr>
+            <th>Usuario Reserva</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Codigo Reserva</th>
+            <th>Accion</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var Reserva in Model)
+            {
+
+                <tr>
+                    <td>@Reserva.UsuarioReserva</td>
+                    <td>@Reserva.FechaInicio</td>
+                    <td>@Reserva.FechaFin</td>
+                    <td>@Reserva.CodigoReserva</td>                    
+                    <td><a class="btn bi bi-folder2-open" asp-controller="Reserva" asp-action="Detalle" asp-route-idHotel="@Reserva.Id">Eliminar</a></td>                    
+                </tr>
+        
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,5 +1,6 @@
 ﻿using Cheztel.Models;
 using Dapper;
+using Microsoft.AspNetCore.Identity;
 using System.Data.SqlClient;
 
 namespace Cheztel.Servicios
@@ -7,6 +8,7 @@ namespace Cheztel.Servicios
 
     public interface IRepositorioHabitaciones
     {
+        Task<IEnumerable<Habitacion>> ActualizarHabitacion(int idHotel, int IdHabitacion);
         Task Crear(Habitacion habitacion);
         Task<IEnumerable<Acomodacion>> ListarAcomodaciones();
         Task<IEnumerable<Habitacion>> ListarHabitaciones(Habitacion habitacion);
@@ -59,6 +61,18 @@ namespace Cheztel.Servicios
 
         }
 
+        public async Task<IEnumerable<Habitacion>> ActualizarHabitacion(int idHotel, int IdHabitacion)
+        {
+
+            using var connection = new SqlConnection(connectionString);
+
+            //return await connection.QueryAsync<Habitacion>("@
+            //UPDATE Habitacion SET Disponibilidad = '0' WHERE hotel = @IdHotel AND IdHabitacion = @IdHabitacion", new {idHotel, IdHabitacion});
+
+            return await connection.QueryAsync<Habitacion>(@"UPDATE Habitacion SET Disponibilidad = '0' WHERE hotel = @IdHotel AND Id = @IdHabitacion", new { idHotel, IdHabitacion });
+            
+        }
+
         public async Task<IEnumerable<Acomodacion>> ListarAcomodaciones()
         {
 
@@ -69,8 +83,6 @@ namespace Cheztel.Servicios
 
         }
       
-
-
         public async Task Crear(Habitacion habitacion)
         {
             using var connection = new SqlConnection(connectionString);
@@ -88,6 +100,9 @@ namespace Cheztel.Servicios
 
             
         }
+
+
+
 
     } 
 

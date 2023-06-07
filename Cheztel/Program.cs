@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IAutenticarUsuarios, AutenticarUsuarios>(); 
 builder.Services.AddTransient<IRepositorioHoteles, RepositorioHoteles>();
 builder.Services.AddTransient<IRepositorioHabitaciones, RepositorioHabitaciones>();
+builder.Services.AddTransient<IRepositorioReservas, RepositorioReservas>();
 
 var app = builder.Build();
 

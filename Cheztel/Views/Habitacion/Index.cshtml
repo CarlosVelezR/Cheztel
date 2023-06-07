@@ -9,6 +9,7 @@
     <section>
 
         <a asp-action="Crear" asp-controller="Habitacion" class="btn bi bi-file-plus btn-danger col-md-2 col-xs-6">Adicionar</a>
+        <a asp-action="Crear" asp-controller="Habitacion" class="btn bi bi-file-plus btn-danger text-center col-md-2 col-xs-6">Registrar Reserva</a>
 
         <table class="table table-sm">
             <thead>
@@ -44,7 +45,9 @@
                                                
                         <td>@habitacion.FechaCreacion</td>
                         <td>@habitacion.Hotel</td>
-                        <td><a class="btn bi bi-folder2-open" asp-controller="Habitacion" asp-action="Detalle" asp-route-idHotel="@habitacion.Id"> Reserva</a></td>
+                        <td>
+                            <a class="btn bi bi-folder2-open" asp-controller="Habitacion" asp-action="ActualizarConsulta" asp-route-idHabitacion="@habitacion.Id"
+                           asp-route-idHotel="@habitacion.Hotel"> Reserva</a></td>
                                                 
                     </tr>
 
