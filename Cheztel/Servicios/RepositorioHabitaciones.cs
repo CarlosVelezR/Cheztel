@@ -10,9 +10,12 @@ namespace Cheztel.Servicios
     {
         Task<IEnumerable<Habitacion>> ActualizarHabitacion(int idHotel, int IdHabitacion);
         Task Crear(Habitacion habitacion);
+        Task EditarHabitacion(Habitacion habitacion);
+        Task<IEnumerable<Habitacion>> EditarHabPorUsuario(Habitacion habitacion);
         Task<IEnumerable<Acomodacion>> ListarAcomodaciones();
         Task<IEnumerable<Habitacion>> ListarHabitaciones(Habitacion habitacion);
         Task<IEnumerable<Habitacion>> ListarHabPorUsuario(int idHotel);
+        Task<Habitacion> ObtenerHabitacionId(int hotel);
     }
 
 
@@ -29,8 +32,6 @@ namespace Cheztel.Servicios
 
         }
 
-
-
         public async Task <IEnumerable<Habitacion>> ListarHabitaciones(Habitacion habitacion)
         {
 
@@ -39,6 +40,40 @@ namespace Cheztel.Servicios
 
             return await connection.QueryAsync<Habitacion>(@"SELECT Id,Nombre,Acomodacion,Disponibilidad,FechaInicio,FechaFin,Hotel,IdReserva 
                                                              FROM Cheztel.dbo.Habitacion");
+
+        }
+
+        public async Task<Habitacion> ObtenerHabitacionId(int hotel)
+        {
+
+            using var conn = new SqlConnection(connectionString);
+
+
+            return await conn.QueryFirstOrDefaultAsync<Habitacion>(@"SELECT Id,Nombre ,Acomodacion,Disponibilidad,Hotel 
+                                                       FROM Cheztel.dbo.Habitacion WHERE Hotel = @hotel", new { hotel });
+
+        }
+
+
+        public async Task EditarHabitacion(Habitacion habitacion)
+        {
+
+
+            using var connection = new SqlConnection(connectionString);
+
+            var editarHabitacion = await connection.QuerySingleOrDefaultAsync<int>("SP_EDITAR_HABITACION_HOTEL", 
+                
+            new           
+            { 
+
+                habitacion.Id,
+                habitacion.Nombre,
+                habitacion.Acomodacion,
+                habitacion.Disponibilidad,               
+                habitacion.Hotel
+                    
+            }, commandType : System.Data.CommandType.StoredProcedure);
+            
 
         }
 
@@ -61,15 +96,30 @@ namespace Cheztel.Servicios
 
         }
 
+        public async Task<IEnumerable<Habitacion>> EditarHabPorUsuario(Habitacion habitacion)
+        {
+
+            using var connection = new SqlConnection(connectionString);
+
+            var consulta = await connection.QueryAsync<Habitacion>(@"SELECT Id,Nombre,Acomodacion,Disponibilidad,FechaCreacion,Hotel 
+                                                             FROM Cheztel.dbo.Habitacion where Hotel = @Hotel and Id = @Id",
+                                                             new {habitacion.Hotel, habitacion.Id });
+
+
+            return await connection.QueryAsync<Habitacion>(@"SELECT Id,Nombre,Acomodacion,Disponibilidad,FechaCreacion,Hotel 
+                                                             FROM Cheztel.dbo.Habitacion where Hotel = @Hotel and Id = @Id", 
+                                                             new { habitacion.Hotel, habitacion.Id });
+
+
+        }
+
         public async Task<IEnumerable<Habitacion>> ActualizarHabitacion(int idHotel, int IdHabitacion)
         {
 
             using var connection = new SqlConnection(connectionString);
 
-            //return await connection.QueryAsync<Habitacion>("@
-            //UPDATE Habitacion SET Disponibilidad = '0' WHERE hotel = @IdHotel AND IdHabitacion = @IdHabitacion", new {idHotel, IdHabitacion});
-
-            return await connection.QueryAsync<Habitacion>(@"UPDATE Habitacion SET Disponibilidad = '0' WHERE hotel = @IdHotel AND Id = @IdHabitacion", new { idHotel, IdHabitacion });
+            return await connection.QueryAsync<Habitacion>(@"UPDATE Habitacion SET Disponibilidad = '0' 
+                                                           WHERE hotel = @IdHotel AND Id = @IdHabitacion", new { idHotel, IdHabitacion });
             
         }
 

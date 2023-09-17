@@ -46,8 +46,17 @@
                         <td>@habitacion.FechaCreacion</td>
                         <td>@habitacion.Hotel</td>
                         <td>
-                            <a class="btn bi bi-folder2-open" asp-controller="Habitacion" asp-action="ActualizarConsulta" asp-route-idHabitacion="@habitacion.Id"
-                           asp-route-idHotel="@habitacion.Hotel"> Reserva</a></td>
+                            <a class="btn bi bi-folder2-open" asp-controller="Habitacion"
+                           asp-action="Editar" asp-route-id="@habitacion.Id">Editar</a>
+              
+                        </td>
+
+                        <td>
+                            <input type="hidden" value="@habitacion.Id" class="ids" />
+               
+                            <a class="btn bi bi-pencil-square" asp-action="Editar" asp-route-id="@habitacion.Id"></a>
+                        
+                        </td>
                                                 
                     </tr>
 

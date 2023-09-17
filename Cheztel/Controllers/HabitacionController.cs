@@ -2,6 +2,7 @@
 using Cheztel.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 
 
@@ -10,8 +11,12 @@ namespace Cheztel.Controllers
     public class HabitacionController : Controller
     {
 
+
+
         private readonly IRepositorioHabitaciones repositorioHabitaciones;
         private readonly IRepositorioHoteles repositorioHoteles;
+    
+
 
         public HabitacionController(IRepositorioHabitaciones repositorioHabitaciones, IRepositorioHoteles repositorioHoteles)
         {
@@ -41,13 +46,39 @@ namespace Cheztel.Controllers
         }
 
 
-        public async Task<IActionResult> ActualizarConsulta(int idHabitacion, int idHotel)
+
+        // AJUSTAR PARA MOSTRAR EL RESULTADO DEL POST
+
+  
+        //public async Task<IActionResult> Editar(int id)
+        //{
+
+        //    var habitacion = await repositorioHabitaciones.ListarHabitaciones();
+
+
+        //    return View(habitacion);
+
+        //}
+
+        public async Task<IActionResult> Editar (int id)
         {
 
-            var actualizarReserva = await repositorioHabitaciones.ActualizarHabitacion(idHotel, idHabitacion);
+            var VerHabitacion = await repositorioHabitaciones.ObtenerHabitacionId(id);
 
-            return RedirectToAction("Index","Habitacion", new { idHotel = idHotel});
+            return View(VerHabitacion);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(Habitacion habitacion)
+        {
+
+        await repositorioHabitaciones.EditarHabitacion(habitacion);
+
+
+            return RedirectToAction("Index");
+            
+        }
+
 
 
         private async Task<IEnumerable<SelectListItem>> ObtenerHotelesId()
