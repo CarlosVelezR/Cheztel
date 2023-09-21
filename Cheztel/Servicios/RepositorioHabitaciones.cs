@@ -43,14 +43,14 @@ namespace Cheztel.Servicios
 
         }
 
-        public async Task<Habitacion> ObtenerHabitacionId(int hotel)
+        public async Task<Habitacion> ObtenerHabitacionId(int id)
         {
 
             using var conn = new SqlConnection(connectionString);
 
 
-            return await conn.QueryFirstOrDefaultAsync<Habitacion>(@"SELECT Id,Nombre ,Acomodacion,Disponibilidad,Hotel 
-                                                       FROM Cheztel.dbo.Habitacion WHERE Hotel = @hotel", new { hotel });
+            return await conn.QueryFirstOrDefaultAsync<Habitacion>(@"SELECT Id,Nombre ,Acomodacion,Disponibilidad,Hotel, FechaCreacion
+                                                       FROM Cheztel.dbo.Habitacion WHERE Id = @id", new { id });
 
         }
 

@@ -75,7 +75,7 @@ namespace Cheztel.Controllers
         await repositorioHabitaciones.EditarHabitacion(habitacion);
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Hoteles");
             
         }
 
